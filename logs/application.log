@@ -1,0 +1,208 @@
+2025-12-13 20:48:02 [main] INFO  util.RemoveAll - External topics: [filtered-messages, messages, blocked-users, forbidden-words]
+2025-12-13 20:48:02 [main] INFO  util.RemoveAll - SUCCESS
+2025-12-13 20:48:03 [main] INFO  ru.kafka.KafkaStreamApp - Топик messages создан
+2025-12-13 20:48:03 [main] INFO  ru.kafka.KafkaStreamApp - Топик filtered-messages создан
+2025-12-13 20:48:03 [main] INFO  ru.kafka.KafkaStreamApp - Топик blocked-users создан
+2025-12-13 20:48:03 [main] INFO  ru.kafka.KafkaStreamApp - Топик forbidden-words создан
+2025-12-13 20:48:03 [main] INFO  ru.kafka.KafkaStreamApp - Топология:
+Topologies:
+   Sub-topology: 0 for global store (will not generate tasks)
+    Source: KSTREAM-SOURCE-0000000000 (topics: [blocked-users])
+      --> KTABLE-SOURCE-0000000001
+    Processor: KTABLE-SOURCE-0000000001 (stores: [blocked-users-store])
+      --> none
+      <-- KSTREAM-SOURCE-0000000000
+  Sub-topology: 1 for global store (will not generate tasks)
+    Source: KSTREAM-SOURCE-0000000002 (topics: [forbidden-words])
+      --> KTABLE-SOURCE-0000000003
+    Processor: KTABLE-SOURCE-0000000003 (stores: [forbidden-words-store])
+      --> none
+      <-- KSTREAM-SOURCE-0000000002
+  Sub-topology: 2
+    Source: KSTREAM-SOURCE-0000000004 (topics: [messages])
+      --> KSTREAM-PEEK-0000000005
+    Processor: KSTREAM-PEEK-0000000005 (stores: [])
+      --> KSTREAM-LEFTJOIN-0000000006
+      <-- KSTREAM-SOURCE-0000000004
+    Processor: KSTREAM-LEFTJOIN-0000000006 (stores: [])
+      --> KSTREAM-FILTER-0000000007
+      <-- KSTREAM-PEEK-0000000005
+    Processor: KSTREAM-FILTER-0000000007 (stores: [])
+      --> KSTREAM-TRANSFORMVALUES-0000000008
+      <-- KSTREAM-LEFTJOIN-0000000006
+    Processor: KSTREAM-TRANSFORMVALUES-0000000008 (stores: [])
+      --> KSTREAM-PEEK-0000000009
+      <-- KSTREAM-FILTER-0000000007
+    Processor: KSTREAM-PEEK-0000000009 (stores: [])
+      --> KSTREAM-SINK-0000000010
+      <-- KSTREAM-TRANSFORMVALUES-0000000008
+    Sink: KSTREAM-SINK-0000000010 (topic: filtered-messages)
+      <-- KSTREAM-PEEK-0000000009
+
+
+2025-12-13 20:48:03 [main] ERROR o.a.k.s.p.internals.StateDirectory - Failed to change permissions for the directory kafka-streams-state-store
+2025-12-13 20:48:03 [main] ERROR o.a.k.s.p.internals.StateDirectory - Failed to change permissions for the directory kafka-streams-state-store\kafka-stream-filter-app
+2025-12-13 20:48:04 [main] INFO  ru.kafka.KafkaStreamApp - Приложение Sales Processor запущено
+2025-12-13 20:48:04 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:48:05 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:48:06 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:48:08 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:48:08 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] ERROR o.a.k.s.p.i.a.RackAwareTaskAssignor - RackId doesn't exist for process e98eedc0-9cd1-47c2-a5ff-04bc78626da8 and consumer kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1-consumer-9363ab66-4fbb-4bcc-97e6-71a6564125c0
+2025-12-13 20:48:09 [main] INFO  ru.kafka.KafkaStreamApp - Kafka Streams успешно запущен
+2025-12-13 20:48:09 [main] INFO  ru.kafka.KafkaStreamApp - Данные о заблокированных пользователях отправлены
+2025-12-13 20:48:09 [main] INFO  ru.kafka.KafkaStreamApp - Запрещенные слова отправлены
+2025-12-13 20:48:09 [main] INFO  ru.kafka.KafkaStreamApp - Все сообщения успешно отправлены
+2025-12-13 20:48:09 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание обработки данных...
+2025-12-13 20:48:09 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login4, value=Message{text='Java', receiver='login1'}
+2025-12-13 20:48:09 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Фильтрация сообщений: key=login4, value=Message{text='Java', receiver='login1'}
+2025-12-13 20:48:09 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login2, value=Message{text='Spring', receiver='login1'}
+2025-12-13 20:48:09 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login3, value=Message{text='1С', receiver='login1'}
+2025-12-13 20:48:09 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login5, value=Message{text='Политика React', receiver='login1'}
+2025-12-13 20:48:09 [kafka-stream-filter-app-e98eedc0-9cd1-47c2-a5ff-04bc78626da8-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Фильтрация сообщений: key=login5, value=Message{text='******** React', receiver='login1'}
+2025-12-13 20:49:14 [Thread-0] INFO  ru.kafka.KafkaStreamApp - Завершение работы приложения...
+2025-12-13 20:57:37 [main] INFO  util.RemoveAll - External topics: [filtered-messages, messages, blocked-users, forbidden-words]
+2025-12-13 20:57:38 [main] INFO  util.RemoveAll - SUCCESS
+2025-12-13 20:57:38 [main] INFO  ru.kafka.KafkaStreamApp - Топик messages создан
+2025-12-13 20:57:38 [main] INFO  ru.kafka.KafkaStreamApp - Топик filtered-messages создан
+2025-12-13 20:57:38 [main] INFO  ru.kafka.KafkaStreamApp - Топик blocked-users создан
+2025-12-13 20:57:38 [main] INFO  ru.kafka.KafkaStreamApp - Топик forbidden-words создан
+2025-12-13 20:57:38 [main] INFO  ru.kafka.KafkaStreamApp - Топология:
+Topologies:
+   Sub-topology: 0 for global store (will not generate tasks)
+    Source: KSTREAM-SOURCE-0000000000 (topics: [blocked-users])
+      --> KTABLE-SOURCE-0000000001
+    Processor: KTABLE-SOURCE-0000000001 (stores: [blocked-users-store])
+      --> none
+      <-- KSTREAM-SOURCE-0000000000
+  Sub-topology: 1 for global store (will not generate tasks)
+    Source: KSTREAM-SOURCE-0000000002 (topics: [forbidden-words])
+      --> KTABLE-SOURCE-0000000003
+    Processor: KTABLE-SOURCE-0000000003 (stores: [forbidden-words-store])
+      --> none
+      <-- KSTREAM-SOURCE-0000000002
+  Sub-topology: 2
+    Source: KSTREAM-SOURCE-0000000004 (topics: [messages])
+      --> KSTREAM-PEEK-0000000005
+    Processor: KSTREAM-PEEK-0000000005 (stores: [])
+      --> KSTREAM-LEFTJOIN-0000000006
+      <-- KSTREAM-SOURCE-0000000004
+    Processor: KSTREAM-LEFTJOIN-0000000006 (stores: [])
+      --> KSTREAM-FILTER-0000000007
+      <-- KSTREAM-PEEK-0000000005
+    Processor: KSTREAM-FILTER-0000000007 (stores: [])
+      --> KSTREAM-TRANSFORMVALUES-0000000008
+      <-- KSTREAM-LEFTJOIN-0000000006
+    Processor: KSTREAM-TRANSFORMVALUES-0000000008 (stores: [])
+      --> KSTREAM-PEEK-0000000009
+      <-- KSTREAM-FILTER-0000000007
+    Processor: KSTREAM-PEEK-0000000009 (stores: [])
+      --> KSTREAM-SINK-0000000010
+      <-- KSTREAM-TRANSFORMVALUES-0000000008
+    Sink: KSTREAM-SINK-0000000010 (topic: filtered-messages)
+      <-- KSTREAM-PEEK-0000000009
+
+
+2025-12-13 20:57:39 [main] ERROR o.a.k.s.p.internals.StateDirectory - Failed to change permissions for the directory kafka-streams-state-store
+2025-12-13 20:57:39 [main] ERROR o.a.k.s.p.internals.StateDirectory - Failed to change permissions for the directory kafka-streams-state-store\kafka-stream-filter-app
+2025-12-13 20:57:40 [main] INFO  ru.kafka.KafkaStreamApp - Приложение Sales Processor запущено
+2025-12-13 20:57:40 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:57:41 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:57:42 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:57:43 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание запуска Kafka Streams... Текущее состояние -> REBALANCING
+2025-12-13 20:57:43 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] ERROR o.a.k.s.p.i.a.RackAwareTaskAssignor - RackId doesn't exist for process b8511500-970b-495c-9a89-f1428ba66cd6 and consumer kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1-consumer-39a0e8ee-1552-48f3-9092-0336fee83a84
+2025-12-13 20:57:44 [main] INFO  ru.kafka.KafkaStreamApp - Kafka Streams успешно запущен
+2025-12-13 20:57:44 [main] INFO  ru.kafka.KafkaStreamApp - Данные о заблокированных пользователях отправлены
+2025-12-13 20:57:44 [main] INFO  ru.kafka.KafkaStreamApp - Запрещенные слова отправлены
+2025-12-13 20:57:44 [main] INFO  ru.kafka.KafkaStreamApp - Все сообщения успешно отправлены
+2025-12-13 20:57:44 [main] INFO  ru.kafka.KafkaStreamApp - Ожидание обработки данных...
+2025-12-13 20:57:44 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login4, value=Message[text=Java, receiver=login1]
+2025-12-13 20:57:44 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Фильтрация сообщений: key=login4, value=Message[text=Java, receiver=login1]
+2025-12-13 20:57:44 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login2, value=Message[text=Spring, receiver=login1]
+2025-12-13 20:57:44 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login3, value=Message[text=1С, receiver=login1]
+2025-12-13 20:57:44 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Получено сообщение: key=login5, value=Message[text=Политика React, receiver=login1]
+2025-12-13 20:57:44 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-StreamThread-1] INFO  ru.kafka.KafkaStreamApp - Фильтрация сообщений: key=login5, value=Message[text=******** React, receiver=login1]
+2025-12-13 21:15:05 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-GlobalStreamThread] WARN  org.apache.kafka.common.utils.Utils - Failed atomic move of C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp to kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint retrying with a non-atomic move
+java.nio.file.AccessDeniedException: C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp -> kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:328)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:291)
+	at java.base/java.nio.file.Files.move(Files.java:1430)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:978)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:964)
+	at org.apache.kafka.streams.state.internals.OffsetCheckpoint.write(OffsetCheckpoint.java:115)
+	at org.apache.kafka.streams.processor.internals.GlobalStateManagerImpl.checkpoint(GlobalStateManagerImpl.java:420)
+	at org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask.flushState(GlobalStateUpdateTask.java:126)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread$StateConsumer.pollAndUpdate(GlobalStreamThread.java:266)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread.run(GlobalStreamThread.java:312)
+2025-12-13 21:22:21 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-GlobalStreamThread] WARN  org.apache.kafka.common.utils.Utils - Failed atomic move of C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp to kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint retrying with a non-atomic move
+java.nio.file.AccessDeniedException: C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp -> kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:328)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:291)
+	at java.base/java.nio.file.Files.move(Files.java:1430)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:978)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:964)
+	at org.apache.kafka.streams.state.internals.OffsetCheckpoint.write(OffsetCheckpoint.java:115)
+	at org.apache.kafka.streams.processor.internals.GlobalStateManagerImpl.checkpoint(GlobalStateManagerImpl.java:420)
+	at org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask.flushState(GlobalStateUpdateTask.java:126)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread$StateConsumer.pollAndUpdate(GlobalStreamThread.java:266)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread.run(GlobalStreamThread.java:312)
+2025-12-13 21:45:30 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-GlobalStreamThread] WARN  org.apache.kafka.common.utils.Utils - Failed atomic move of C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp to kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint retrying with a non-atomic move
+java.nio.file.AccessDeniedException: C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp -> kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:328)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:291)
+	at java.base/java.nio.file.Files.move(Files.java:1430)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:978)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:964)
+	at org.apache.kafka.streams.state.internals.OffsetCheckpoint.write(OffsetCheckpoint.java:115)
+	at org.apache.kafka.streams.processor.internals.GlobalStateManagerImpl.checkpoint(GlobalStateManagerImpl.java:420)
+	at org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask.flushState(GlobalStateUpdateTask.java:126)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread$StateConsumer.pollAndUpdate(GlobalStreamThread.java:266)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread.run(GlobalStreamThread.java:312)
+2025-12-13 22:05:48 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-GlobalStreamThread] WARN  org.apache.kafka.common.utils.Utils - Failed atomic move of C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp to kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint retrying with a non-atomic move
+java.nio.file.AccessDeniedException: C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp -> kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:328)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:291)
+	at java.base/java.nio.file.Files.move(Files.java:1430)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:978)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:964)
+	at org.apache.kafka.streams.state.internals.OffsetCheckpoint.write(OffsetCheckpoint.java:115)
+	at org.apache.kafka.streams.processor.internals.GlobalStateManagerImpl.checkpoint(GlobalStateManagerImpl.java:420)
+	at org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask.flushState(GlobalStateUpdateTask.java:126)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread$StateConsumer.pollAndUpdate(GlobalStreamThread.java:266)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread.run(GlobalStreamThread.java:312)
+2025-12-13 22:06:04 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-GlobalStreamThread] WARN  org.apache.kafka.common.utils.Utils - Failed atomic move of C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp to kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint retrying with a non-atomic move
+java.nio.file.AccessDeniedException: C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp -> kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:328)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:291)
+	at java.base/java.nio.file.Files.move(Files.java:1430)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:978)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:964)
+	at org.apache.kafka.streams.state.internals.OffsetCheckpoint.write(OffsetCheckpoint.java:115)
+	at org.apache.kafka.streams.processor.internals.GlobalStateManagerImpl.checkpoint(GlobalStateManagerImpl.java:420)
+	at org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask.flushState(GlobalStateUpdateTask.java:126)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread$StateConsumer.pollAndUpdate(GlobalStreamThread.java:266)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread.run(GlobalStreamThread.java:312)
+2025-12-13 22:06:08 [kafka-stream-filter-app-b8511500-970b-495c-9a89-f1428ba66cd6-GlobalStreamThread] WARN  org.apache.kafka.common.utils.Utils - Failed atomic move of C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp to kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint retrying with a non-atomic move
+java.nio.file.AccessDeniedException: C:\java\yandex_kafka\hw-kafka-streams\kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint.tmp -> kafka-streams-state-store\kafka-stream-filter-app\global\.checkpoint
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:89)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:328)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:291)
+	at java.base/java.nio.file.Files.move(Files.java:1430)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:978)
+	at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:964)
+	at org.apache.kafka.streams.state.internals.OffsetCheckpoint.write(OffsetCheckpoint.java:115)
+	at org.apache.kafka.streams.processor.internals.GlobalStateManagerImpl.checkpoint(GlobalStateManagerImpl.java:420)
+	at org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask.flushState(GlobalStateUpdateTask.java:126)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread$StateConsumer.pollAndUpdate(GlobalStreamThread.java:266)
+	at org.apache.kafka.streams.processor.internals.GlobalStreamThread.run(GlobalStreamThread.java:312)
+2025-12-13 22:15:14 [Thread-0] INFO  ru.kafka.KafkaStreamApp - Завершение работы приложения...
