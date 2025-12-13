@@ -53,5 +53,3 @@
      login4 -> { "text": "Java", "receiver": "login1" }
      login5 -> { "text": "******** React", "receiver": "login1" }
 ```
-
-6. 
